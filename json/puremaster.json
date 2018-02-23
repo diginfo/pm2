@@ -1,0 +1,78 @@
+{
+  "apps":[
+      {
+      "name": "puremaster.puremfg.net",
+      "disabled": false,
+      "appid": "puremfg",
+      "proxy": {
+        "enable":true,
+        "ssl": false,
+        "host": "localhost",
+        "alias": []
+      },
+      "node_args": ["--no-deprecation"],
+      "script": "/usr/share/nodejs/dev/run/pure/app.min.js",
+      "env": {
+          "TZOSET": "+8:00",
+          "MOBILE": true,
+          "SITEID": "puremaster",
+          "GRPID": "oms",
+          "DATA": "/usr/share/nodejs/dev/src/puremaster/data",
+          "GRP_DATA": "/usr/share/nodejs/dev/src/puremaster/data",
+          "PENTAHO" :{
+            "user":"pure@mydev",
+            "pwd": "bukit8002"  
+          },
+          "NODE_ENV": "development",
+          "proxy": "off",
+          "PORT": 3005,
+          "VWLT_PORT": 805,
+          "DBSA":{
+            "host": "localhost",
+            "name":"PUREMASTER",
+            "user":"root",
+            "pwd":"bukit8002",
+            "engine": "MYSQL",
+            "pooling": true,
+            "connectionLimit": 1
+          }
+      },
+      "log_date_format": "DD-MM HH:mm:ss",
+      "exec_mode": "fork"
+    },
+
+    {
+      "name": "puremaster-sf.puremfg.net",
+      "disabled": false,
+      "appid": "vwlt",
+      "proxy": {
+        "enable":true,
+        "ssl": false,
+        "host": "localhost",
+        "alias": []
+      },
+      "node_args": ["--no-deprecation"],
+      "script": "/usr/share/nodejs/dev/src/vwlt/app.js",
+      "env": {
+          "TZOSET": "+7:00",
+          "SITEID": "puremaster",
+          "USER_AGENT": false,
+          "NODE_ENV": "development",
+          "PORT": 805,
+          "DBVW": "/usr/share/nodejs/dev/src/puremaster/data/dwap.db",
+          "DBSA":{
+            "host": "localhost",
+            "name":"PUREMASTER",
+            "user":"root",
+            "pwd":"bukit8002",
+            "engine": "MYSQL",
+            "pooling": true,
+            "connectionLimit": 1
+          }
+      },
+      "log_date_format": "DD-MM HH:mm:ss",
+      "exec_mode": "fork"
+    }
+
+  ]
+}

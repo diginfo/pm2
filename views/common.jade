@@ -1,0 +1,14 @@
+mixin pdata()
+  script#_pdata_.
+    dwap.pdata = !{JSON.stringify(data)};
+    var elem = document.getElementById("_pdata_"); elem.parentNode.removeChild(elem);
+
+mixin mobile()
+  if(mobile)
+    include mixins.m.jade
+    block
+
+mixin desktop()
+  if(!mobile)
+    include mixins.jade
+    block

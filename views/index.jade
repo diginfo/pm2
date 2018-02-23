@@ -1,0 +1,89 @@
+include ./mixins.jade
+
+doctype html
+html(lang="en-GB")
+  head
+    block head
+
+      link(rel='stylesheet' type='text/css' href='js3/jquery-easyui-1.4.4/themes/default/easyui.css')
+      link(rel='stylesheet' type='text/css' href='js3/jquery-easyui-1.4.4/themes/icon.css')
+      link(rel='stylesheet' type='text/css' href='css/icons.css')
+      link(rel='stylesheet' type='text/css' href='css/main.css')
+           
+      script(type='text/javascript' src='js3/jquery-easyui-1.4.4/jquery.min.js')
+      script(type='text/javascript' src='js3/jquery-easyui-1.4.4/jquery.easyui.min.js')
+      script(type='text/javascript' src='js/eui.extend.js')
+      script(type='text/javascript' src='js/main.js')
+
+  body#cc.easyui-layout()
+    block content
+      style.
+        .datagrid-header-row {height:33px;}
+        #tools .fitem {margin:0;}
+        #tools .fitem label {width:auto;margin: 0px 6px;}
+        #tools a {margin:0 2px;}
+        #tools .l-btn-icon {left:2px;}
+        //-#tools span[class*="icon-"] {background-size:12px;}
+        
+      +layout()
+        div(region="west" style="width:400px;background:$FAFAFA;")
+          #pm2list
+          
+          
+        div(region="center" tools="#tools")
+          #tools.datagrid-toolbar
+            div(style="padding:4px 0;")
+              +button('',{id:'but_add', title:'add', iconCls:'icon-add', style:'height:22px;width:22px;'})
+              span.vert-sep
+              +button('',{id:'but_start', title:'Start', iconCls:'icon-on', class:'abut', style:'height:22px;width:22px;', disabled:true})
+              +button('',{id:'but_stop', title:'Stop', iconCls:'icon-off', class:'abut', style:'height:22px;width:22px;', disabled:true})
+              +button('',{id:'but_restart', title:'Restart', iconCls:'icon-reload', class:'abut', style:'height:22px;width:22px;', disabled:true})
+              span.vert-sep
+              +button('',{id:'but_cancel', title:'Cancel', iconCls:'icon-cancel', class:'ebut', style:'height:22px;width:22px;', disabled:true})
+              +button('',{id:'but_delete', title:'Delete', iconCls:'icon-delete', class:'ebut', style:'height:22px;width:22px;', disabled:true})
+              +button('',{id:'but_edit', title:'Edit', iconCls:'icon-edit', class:'ebut', style:'height:22px;width:22px;', disabled:true})
+              +button('',{id:'but_save', title:'Save', iconCls:'icon-save', class:'ebut', style:'height:22px;width:22px;', disabled:true})
+              span.vert-sep
+              
+          form#main(style="padding-top:20px;")
+            +input({type:'hidden', name:'_mode', value:'edit'})
+            .two
+              div
+                +fieldset('General')
+                  +fitem('App ID',{id:'~', name:'appid', required: true, class:'easyui-combobox','data-options':"readonly:true, data:[{value:'puremfg',text:'Pure Desktop'},{value:'vwlt',text:'Pure Shopfloor'}]"})
+                  +fitem('Host Name',{name:'name', class:'easyui-textbox'})
+                  +fitem('Port Number',{name:'_env^PORT', class:'easyui-numberbox'})
+                  
+                  +fitem('Timezone Offset',{id:'~', name:'_env^TZOSET_PM', class:'easyui-combobox','data-options':"data:[{value:'+',text:'PLUS'},{value:'-',text:'MINUS'}]", style:'width:70px'})
+                    +input({id:'~', name:'_env^TZOSET_HR', class:'easyui-timespinner now calchrs',style:'width:130px'})
+                  
+                  div.pure-on
+                    +fitem('Group ID',{name:'_env^GRPID', class:'easyui-textbox pure-on'})
+                    +fitem('Site ID',{name:'_env^SITEID', class:'easyui-textbox pure-on'})
+                    +fitem('Mobile Enabled',{name:'_env^MOBILE', class:'easyui-combobox pure-on','data-options':"data:[{value:true,text:'YES'},{value:false,text:'NO'}]"})
+
+                +fieldset('Proxy Setup')
+                  +fitem('Enabled',{name:'_proxy^enable', class:'easyui-combobox','data-options':"data:[{value:true,text:'YES'},{value:false,text:'NO'}]"})
+                  +fitem('HTTPS',{name:'_proxy^ssl', class:'easyui-combobox','data-options':"data:[{value:true,text:'YES'},{value:false,text:'NO'}]"})
+                  +fitem('Host IP',{name:'_proxy^host', class:'easyui-textbox'})
+                  +fitem('Host Aliases',{name:'_proxy^alias', class:'easyui-textbox option'})                  
+              
+              div
+                +fieldset('Data Source')
+                  +fitem('Engine',{name:'_env_DBSA^engine', readonly:true, class:'easyui-combobox','data-options':"data:[{value:'MYSQL',text:'MY-SQL'}]"})
+                  +fitem('Server Host',{name:'_env_DBSA^host', class:'easyui-textbox'})
+                  +fitem('Database Name',{name:'_env_DBSA^name', class:'easyui-textbox'})
+                  +fitem('User ID',{name:'_env_DBSA^user', class:'easyui-textbox'})
+                  +fitem('Password',{name:'_env_DBSA^pwd', class:'easyui-textbox', type:'password'})
+    
+                  +fitem('Enable Pooling',{name:'_env_DBSA^pooling', class:'easyui-combobox','data-options':"data:[{value:true,text:'YES'},{value:false,text:'NO'}]"})
+                  +fitem('Pool Size',{name:'_env_DBSA^connectionLimit', class:'easyui-numberspinner', 'data-options':"value:5, min:2, precision:0"})
+                
+                +fieldset('Data Folders')
+                  +fitem('System Database',{name:'_env^DBVW', class:'easyui-textbox option'})
+                  +fitem('Site Folders',{name:'_env^DATA', class:'easyui-textbox pure-on'})
+                  +fitem('Group Folders',{name:'_env^GRP_DATA', class:'easyui-textbox pure-on'})
+                
+      script(type="text/javascript"): include js/index.js
+
+      

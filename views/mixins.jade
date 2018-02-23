@@ -1,0 +1,165 @@
+//-
+  //## TODO - INVESTIGATE LOCALS OBJECT ##
+  - var _ulan = locals.qry._udata.language || 'eng'; 
+  - var _lang = global._lang[_ulan] || {};
+  - var _lankeys = Object.getOwnPropertyNames(_lang);
+  - function trans(txt){var match = new RegExp(txt, 'i').exec(_lankeys); return match && match.length > 0 ? _lang[match[0]]:txt;}
+  //- function trans(txt){return txt;}
+  
+
+  
+  // - var _langs = []; function lanadd(txt,type){if(!isdev) return; _langs.push("INSERT OR REPLACE INTO lang (appid,type,lang,key,val) VALUES ('"+appid+"','"+type+"','eng','"+txt+"','"+txt+"')")}
+  //- if(isdev) setTimeout(function(){ fn.dbsl.exec(_langs.join(';'),fn.cl) },1000);
+  
+  //-mixin custom(groupid)
+    -var reg = new RegExp(groupid);
+    if(reg.test(global.conf.codata.groupuid))
+      case groupid
+        when 'dis': include ../custom/oms/mod/mixins.jade
+        when 'oms': include ../custom/oms/mod/mixins.jade
+        default: -console.log(groupid+' not found')
+    
+      if block
+        block
+
+
+//- Functions
+- function trans(txt){return txt;}
+- function getOpts(obj){ try {return eval('({'+obj+'})');} catch(err){return {}}}
+- function extend(obj,data){for(var k in data){obj[k] = data[k]}; return obj;}
+
+
+mixin mobile()
+  if(mobile)
+    block
+
+mixin desktop()
+  if(!mobile)
+    block
+
+mixin require(src)
+  script#_addjs_.
+    headScript('#{src}');
+    var elem = document.getElementById("_addjs_"); elem.parentNode.removeChild(elem);
+    
+mixin spec(legend,input,opts)
+  -opts=opts || {style:'margin-top:6px;'}
+  +fieldset(legend,opts)
+    +input(extend({class:'easyui-textbox',validType:['length[1,255]'],'data-options':"multiline:true",style:'height:130px;width:330px;'},input))
+
+mixin pdata()
+  script#_pdata_.
+    dwap.pdata = !{JSON.stringify(data)};
+    //console.log('isdev:'+isdev);
+    //-if(isdev) console.log(dwap)
+    var elem = document.getElementById("_pdata_"); elem.parentNode.removeChild(elem);
+
+mixin button(text,vars)
+  if(mobile)
+    a(href="#" data-role="button" data-inline="true")&attributes(vars)=text
+  else
+    a(href="#" class="easyui-linkbutton")&attributes(vars)=text
+
+mixin fitem(label,input,fitem)
+  -fitem=fitem||{};
+  -if(mobile) fitem['class'] = "ui-field-contain";
+  div.fitem&attributes(fitem)
+    +label(label)
+    +input(input) 
+    if block
+      span(style="display:inline-block;width:6px;")
+      block
+
+mixin input(input)
+  -if(input.id=='~') input.id=input.name; if(input.name=='~') input.name=input.id;
+  -if(input.prompt){input.placeholder=input.prompt; delete(input.prompt);}  
+  -if(!mobile)
+    // data-role="flipswitch"
+    -var opt={}; if(input['data-options']) var opt = getOpts(input['data-options']);
+    -if(opt.data && opt.data.length < 12) {input.panelHeight = 'auto';}
+    -input.class = input.class || ''; if(input.eui) input.class += ' easyui-'+input.eui;
+  
+  input&attributes(input)
+
+
+//-mixin button(text,vars)
+  a(href="#" class="easyui-linkbutton")&attributes(vars)=text
+
+//-mixin fitem(label,input,fitem)
+  -fitem=fitem||{};
+  //-if(mobile && fitem['data-inline']==true) {fitem['data-role']='fieldcontain';}
+  .fitem&attributes(fitem)
+    +label(label)
+    +input(input) 
+    if block
+      span(style="display:inline-block;width:6px;")
+      block
+
+mixin label(label)
+  -if(label.text)
+    -text=label.text; delete label.text
+    -if(text=='') label.class='empty';
+    //-if(lang && langs && langs[lang])
+    //-lanadd(text,'label');
+    label&attributes(label)!=trans(text)
+  -else
+    -var attr={}; if(label=='') attr.class='empty';
+    //-lanadd(label,'label');
+    label&attributes(attr)!=trans(label)
+     
+//-mixin input(input)
+  -var opt={}; if(input['data-options']) var opt = getOpts(input['data-options']);
+  -if(opt.data && opt.data.length < 12) {input.panelHeight = 'auto';}
+  -input.class = input.class || ''; if(input.eui) input.class += ' easyui-'+input.eui;
+  -if(input.id=='~') input.id=input.name; if(input.name=='~') input.name=input.id;
+  input&attributes(input)
+
+mixin layout(opts)
+  -opts=opts||{};opts.fit=opts.fit||'true';
+  div.easyui-layout()&attributes(opts)
+    block
+
+mixin fieldset(legend,opts)
+  -opts=opts||{}
+  //-if(opts.class) var col = opts.class.match(/one|two|three|four|five|six/)
+  fieldset()&attributes(opts)
+    legend=legend
+    if(col)
+      div(class=col)
+        block
+    else
+      block
+
+mixin udf(ron)
+  -ron=ron || false;
+  -var cls = 'easyui-textbox'; if(ron) cls += ' sub-off'; 
+  -for (var x=1; x<11; x++)
+    +fitem({text:'User Label '+x,id:'UDF_'+x},{name:'USER_'+x,readonly:ron, class:cls,'data-options':"validType:['length[1,80]']"},{'data-role':'fieldcontain'})
+
+mixin udf-subon()
+  -for (var x=1; x<11; x++)
+    +fitem({text:'User Label '+x,id:'UDF_'+x},{name:'USER_'+x,class:'easyui-textbox sub-on','data-options':"validType:['length[1,80]']"},{'data-role':'fieldcontain'})
+    
+    
+mixin dashboard(data,attr)
+  link(rel='stylesheet' type='text/css' href='css/dash.min.css')
+  if(data)
+    each box in data
+      +dash-box(box)
+  else
+    block
+  
+mixin dash-box(box)
+  li
+    div.title=box.title
+    div.body  
+      each row in box.data
+        .row
+          span.label=row.label
+          span.value=row.value
+          
+mixin tab-item(title,attr)
+  //-lanadd(title,'tab');
+  div(title=title)&attributes(attr)
+    block
+  

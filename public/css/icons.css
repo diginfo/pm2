@@ -1,0 +1,316 @@
+/* ICONS */
+/*
+*:not(.tree) span[class*=" icon-"], *:not(.tree) span[class*=" res-icon-"] {
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+*/
+
+span[class*="icon-"] {
+  background-repeat: no-repeat;
+}
+
+a.textbox-icon {
+  background-repeat: no-repeat !important;
+  background-position: center center;
+  background-color: transparent;
+}
+
+.icon-add	           { background: url('../icons/add_cross.png')}
+.icon-address	       { background: url('../icons/address.png')}
+.icon-admin	         { background: url('../icons/folder_wrench.png')}
+.icon-alert	         { background: url('../icons/alert.png')}
+.icon-attach	       { background: url('../icons/pclip_add.png')}
+.icon-bar	           { background: url('../icons/chart_bar.png')}
+.icon-barcode        { background: url('../icons/page_barcode.png')}
+.icon-bhave          { background: url('../icons/checklist.png')}	
+.icon-bolt           { background: url('../icons/bolt.png')}
+.icon-book	         { background: url('../icons/book_open.png')}
+.icon-bool	         { background: url('../icons/boolean.png')}
+.icon-box            { background: url('../icons/box_open.png')}
+.icon-box_inout      { background: url('../icons/box_inout.png')}
+.icon-box_in-big     { background: url('../icons/32_box_in.png')}	
+.icon-box_out        { background: url('../icons/box_out.png')}	
+.icon-box_out-big    { background: url('../icons/32_box_out.png')}	
+.icon-box_cross      { background: url('../icons/box_cross.png')}	
+.icon-box_tick       { background: url('../icons/box_tick.png')}	
+.icon-boxes	         { background: url('../icons/boxes.png')}
+.icon-bug 	         { background: url('../icons/bug.png')}
+.icon-busy	         { background: url('../icons/busy.gif') no-repeat -10px 0}
+.icon-calc	         { background: url('../icons/calculator.png')}
+
+.icon-cal_in-big	 { background: url('../icons/32_cal_in.png')}
+.icon-cal_out-big	 { background: url('../icons/32_cal_out.png')}
+
+.icon-calibrate	     { background: url('../icons/gauge.png')}
+.icon-cancel-big	   { background: url('../icons/32_cancel.png')}
+.icon-cf	           { background: url('../icons/user_comment_blu.png')}
+.icon-chart	         { background: url('../icons/chart_bar.png')}
+.icon-ci	           { background: url('../icons/ci.png')}
+.icon-classes        { background: url('../icons/tab_go.png')}
+.icon-clock	         { background: url('../icons/clock.png')}
+.icon-clone	         { background: url('../icons/clone_dolly.png')}
+.icon-clear	         { background-image: url('../icons/filter_clear.png')}
+.icon-coat-resin	   { background: url('../icons/coat_resin.png')}
+.icon-coat-phos	     { background: url('../icons/coat_phos.png')}
+.icon-coating	       { background: url('../icons/coating.png')}
+.icon-coc	           { background: url('../icons/certificate_pass.png')}
+.icon-column         { background: url('../icons/table_column.png')}	
+.icon-comply         { background: url('../icons/tick.png')}	
+.icon-config         { background: url('../icons/calculator.png')}	
+.icon-copy	         { background: url('../icons/page_copy.png')}
+.icon-cpar	         { background: url('../icons/cpar.png')}
+.icon-cprop	         { background: url('../icons/customer_box.png')}
+.icon-cross	         { background: url('../icons/cross.png')}
+.icon-customer       { background: url('../icons/customer.png')}
+.icon-date	         { background: url('../icons/calendar.png')}
+.icon-dbgo           { background: url('../icons/database_go.png')}
+.icon-delete	       { background: url('../icons/trash.png')}
+.icon-download       { background: url('../icons/download.png')}	
+.icon-edit	         { background: url('../icons/page_edit.png')}
+.icon-edit-end	     { background: url('../icons/page_edit_end.png')}
+.icon-email	         { background: url('../icons/email_go.png')}
+.icon-engine	       { background: url('../icons/engine.png')}
+
+
+.icon-fg_out-big     { background: url('../icons/32_fg_out.png')}
+.icon-fg_in-big      { background: url('../icons/32_fg_in.png')}	
+
+.icon-find           { background: url('../icons/search.png')}	
+.icon-flag_blu       { background: url('../icons/flag_blue.png')}	
+.icon-flag_grn       { background: url('../icons/flag_green.png')}	
+.icon-flag_ora       { background: url('../icons/flag_orange.png')}	
+.icon-flag_pnk       { background: url('../icons/flag_pink.png')}	
+.icon-flag_pur       { background: url('../icons/flag_purple.png')}	
+.icon-flag_red       { background: url('../icons/flag_red.png')}	
+.icon-flag_yel       { background: url('../icons/flag_yellow.png')}	
+.icon-flink	         { background: url('../icons/folder_link.png')}
+
+.icon-focus	         { background: url('../icons/magnifier.png')}
+
+.icon-folder         { background: url('../icons/folder.png')}
+.icon-folder_fail    { background: url('../icons/folder_fail.png')}
+.icon-folder_pass    { background: url('../icons/folder_pass.png')}
+.icon-folder_share   { background: url('../icons/folder_share.png')}
+.icon-folder_warn    { background: url('../icons/folder_warn.png')}
+
+.icon-form           { background: url('../icons/report_form.png')}
+
+.icon-gauge	         { background: url('../icons/micrometer.png')}
+
+.icon-gauge_in-big	 { background: url('../icons/32_gauge_in.png')}
+.icon-gauge_out-big	 { background: url('../icons/32_gauge_out.png')}
+
+.icon-gear	         { background: url('../icons/gear.png')}
+.icon-global         { background: url('../icons/world.png')}	
+.icon-go             { background: url('../icons/go.png')}	
+.icon-go-small	     { background: url('../icons/12_go.png') margin-top:-6px}
+.icon-godoc          { background: url('../icons/eye.png')}
+.icon-group          { background: url('../icons/group.png')}	
+.icon-home	         { background: url('../icons/home.png')}
+.icon-html	         { background: url('../icons/html.png')}
+.icon-info	         { background: url('../icons/information.png')}
+.icon-inout	         { background: url('../icons/issue_receive.png')}
+.icon-insert	       { background: url('../icons/arrow_branch.png')}
+
+.icon-job_out-big	   { background: url('../icons/32_job_out.png')}
+.icon-job_in-big	   { background: url('../icons/32_job_in.png')}
+
+.icon-lease	         { background: url('../icons/page_gear.png')}
+.icon-linked	       { background: url('../icons/linked.png')}
+
+.icon-line	         { background: url('../icons/chart_line.png')}
+.icon-list	         { background: url('../icons/list.png')}
+.icon-lists          { background: url('../icons/list.png')}	
+
+.icon-locked,
+.icon-lock	         { background: url('../icons/lock.png')}
+
+.icon-lock-go	       { background: url('../icons/lock_go.png')}
+.icon-login	         { background: url('../icons/key.png')}
+.icon-logout	       { background: url('../icons/logout.png')}
+.icon-material	     { background: url('../icons/inventory.png')}
+.icon-magnify	       { background: url('../icons/magnifier.png')}
+.icon-manager        { background: url('../icons/application_view_detail.png')}	
+.icon-measure	       { background: url('../icons/measure.png')}
+.icon-mod            { background: url('../icons/sitemap.png')}	
+.icon-move           { background: url('../icons/arrow_move.png')}	
+.icon-mfg	           { background: url('../icons/mfg.png')}
+.icon-money	         { background: url('../icons/money.png')}
+.icon-monitor	       { background: url('../icons/monitor.png')}
+.icon-ncr	           { background: url('../icons/flag_red.png')}
+.icon-ncr-ok         { background: url('../icons/flag_red_tick.png')}
+.icon-notes	         { background: url('../icons/page_white_text.png')}
+.icon-nutbolt        { background: url('../icons/nutbolt.png')}
+.icon-oc	           { background: url('../icons/certificate.png')}
+.icon-on	           { background: url('../icons/power_on.png')}
+.icon-off	           { background: url('../icons/power_off.png')}
+.icon-og             { background: url('../icons/og.png')}	
+.icon-onestop        { background: url('../icons/one-stop.png')}
+.icon-org	           { background: url('../icons/org.png')}
+.icon-others	       { background: url('../icons/others.png')}
+.icon-part	         { background: url('../icons/part.png')}
+.icon-pagered	       { background: url('../icons/page_red.png')}
+.icon-password	     { background: url('../icons/password.png')}
+.icon-pc	           { background: url('../icons/computer.png')}
+.icon-pclip	         { background: url('../icons/attach.png')}
+.icon-pentaho        { background: url('../icons/pentaho.png')}
+.icon-pho            { background: url('../icons/pentaho.png')}
+.icon-people	       { background: url('../icons/people.png')}
+.icon-pie	           { background: url('../icons/chart_pie.png')}
+.icon-pm	           { background: url('../icons/certificate.png')}
+.icon-postit	       { background: url('../icons/postit.png')}
+.icon-pq	           { background: url('../icons/measure.png')}
+.icon-qmark	         { background: url('../icons/qmark.png')}
+.icon-qm	           { background: url('../icons/measure.png')}
+.icon-qp	           { background: url('../icons/test.png')}
+.icon-qtest          { background: url('../icons/clipboard.png')}
+.icon-rental	       { background: url('../icons/rental_gauge.png')}
+.icon-reload	       { background: url('../icons/reload_ora.png')}
+.icon-repair	       { background: url('../icons/broken.png')}
+.icon-repair_in-big	 { background: url('../icons/32_broken_in.png')}
+.icon-repair_out-big { background: url('../icons/32_broken_out.png')}
+
+.icon-report	       { background: url('../icons/report.png')}
+.icon-repeat-big	   { background: url('../icons/32_repeat.png')}
+.icon-report-go	     { background: url('../icons/report_go.png')}
+.icon-report-user	   { background: url('../icons/report_user.png')}
+
+.icon-reset	         { background: url('../icons/filter_clear.png')}
+.icon-rename	       { background: url('../icons/rename.png')}
+.icon-resource	     { background: url('../icons/group_gear.png')}
+
+.icon-save-big	     { background: url('../icons/32_save.png')}
+.icon-server	       { background: url('../icons/server.png')}
+
+
+.icon-shopfloor	     { background: url('../icons/time_go.png')}
+
+.icon-ship	         { background: url('../icons/forklift.png')}
+.icon-ship_out-big	 { background: url('../icons/32_ship_out.png')}
+.icon-ship_in-big	   { background: url('../icons/32_ship_in.png')}
+
+.icon-specs	         { background: url('../icons/page_white_text.png')}
+.icon-sum	           { background: url('../icons/sum.png')}
+.icon-support	       { background: url('../icons/support.png')}
+
+.icon-task           { background: url('../icons/calendar_task.png')}
+.icon-test           { background: url('../icons/test.png')}
+.icon-template       { background: url('../icons/table_gear.png')}
+.icon-thumb_down	   { background: url('../icons/thumb_down.png')}
+.icon-thumb_up	     { background: url('../icons/thumb_up.png')}
+.icon-tick	         { background: url('../icons/tick.png')}
+.icon-ticket	       { background: url('../icons/timesheet.png')}
+.icon-tools	         { background: url('../icons/tools.png')}
+.icon-tools_in-big	 { background: url('../icons/32_tools_in.png')}
+.icon-tools_out-big	 { background: url('../icons/32_tools_out.png')}
+.icon-touch	         { background: url('../icons/touch.png')}
+.icon-trace	         { background: url('../icons/trace.png')}
+.icon-udf            { background: url('../icons/list.png')}	
+.icon-undo	         { background: url('../icons/undo.png')}
+.icon-unlinked	     { background: url('../icons/unlinked.png')}
+.icon-unlocked       { background: url('../icons/lock_open.png')}	
+.icon-upload         { background: url('../icons/upload.png')}	
+.icon-user	         { background: url('../icons/user.png')}
+.icon-user_comment	 { background: url('../icons/user_comment_blu.png')}
+.icon-user_down	     { background: url('../icons/user_down.png')}
+.icon-user_up	       { background: url('../icons/user_up.png')}
+.icon-value	         { background: url('../icons/dimension.png')}
+.icon-verified	     { background: url('../icons/verified.png')}
+.icon-view           { background: url('../icons/eye.png')}	
+.icon-vmfg           { background: url('../icons/vmfg.png')}	
+.icon-po           { background: url('../icons/po.png')}  
+
+.res-icon-C	         { background: url('../icons/money.png')}
+.res-icon-I	         { background: url('../icons/people.png')}
+.res-icon-W  	       { background: url('../icons/gear.png')}
+
+/* ARROWS */
+.icon-left	         { background: url('../icons/combo_arrow_l.png')}
+.icon-right	         { background: url('../icons/combo_arrow_r.png')}
+.icon-up	           { background: url('../icons/arrow_up.png')}
+.icon-down	         { background: url('../icons/arrow_down.png')}
+.icon-up-big	       { background: url('../icons/32_up.png')}
+.icon-down-big	     { background: url('../icons/32_down.png')}
+
+.icon-bak	           { background: url('../icons/combo_arrow_l.png')}
+.icon-fwd	           { background: url('../icons/combo_arrow_r.png')}
+
+.icon-zero_dollar            { background: url('../icons/zero_dollar.png')}
+/* DOCUMENTS */
+.icon-doc	           { background: url('../icons/doc.png')}
+.icon-img	           { background: url('../icons/image.png')}
+.icon-pdf	           { background: url('../icons/pdf.png')}
+.icon-ppt	           { background: url('../icons/ppt.png')}
+.icon-xls	           { background: url('../icons/xls.png')}
+.icon-zip	           { background: url('../icons/zip.png')}
+
+/* POSITIONING */
+.icon-c {
+  background-position: center center;
+} .icon-l {
+  background-position: left center
+} .icon-r {
+  background-position: right center;
+}
+
+/* DATAGRID ROW ICON */
+
+.datagrid-cell > .icon-dg {
+  height: 16px;
+  width: 100%;
+  position: relative;
+  top: 2px;
+  background-repeat: no-repeat;
+  background-position: center center;
+} .datagrid-cell > .icon-dg.left {
+  width: 16px;
+  float: left;
+} .datagrid-cell > span.icon-dg.click {
+  cursor: pointer;
+}
+
+/*
+.datagrid-cell > span.icon-dg {
+  background-repeat: no-repeat;
+  background-position:left center;
+  height: 18px;
+  position: absolute;
+  width: 20px;
+} .datagrid-cell > span.icon-dg ~ span {
+  margin-left: 24px;
+}
+*/
+
+
+/* TEST RESULT ROW ICON */
+tr td.fail, .fail > div,
+tr td.pass, .pass > div,
+tr td.none, .none > div {
+  background-position:90%;
+  background-repeat:no-repeat;
+  text-align:left !important;
+}
+
+tr td.fail {background-image:url('../icons/cross.png')}
+tr td.pass {background-image:url('../icons/tick.png')}
+tr td.none {background-image:url('../icons/qmark.png')}
+
+
+/* VWLT ICONS */
+.vwlt-jstop         { background: url('../icons/vwlt-jstop.png')}
+.vwlt-srun          { background: url('../icons/vwlt-srun.png')}
+.vwlt-sset          { background: url('../icons/vwlt-sset.png')}
+.vwlt-wo_enq        { background: url('../icons/vwlt-wo_enq.png')}
+.vwlt-clk_out       { background: url('../icons/vwlt-clk_out.png')}
+.vwlt-break         { background: url('../icons/vwlt-break.png')}
+.vwlt-clk_in        { background: url('../icons/vwlt-clk_in.png')}
+.vwlt-put_ind       { background: url('../icons/vwlt-put_ind.png')}
+.vwlt-put_thold     { background: url('../icons/vwlt-put_thold.png')}
+.vwlt-emp_val	      { background: url('../icons/thumb_up.png')}
+
+/* NCR ICONS */
+.icon-ncr-LOW       { background: url("../icons/flag_green.png")}
+.icon-ncr-MEDIUM    {background: url("../icons/flag_blue.png")}
+.icon-ncr-HIGH      {background: url("../icons/flag_orange.png")}
+.icon-ncr-CRITICAL  {background: url("../icons/flag_red.png")}

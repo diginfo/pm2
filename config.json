@@ -1,0 +1,97 @@
+{
+  "vars":{
+    "sitedir"       : "/usr/share/nodejs/dev/run",
+    "pmapp"         : "/usr/share/nodejs/run/app.min.js",
+    "vwapp"         : "/usr/share/nodejs/dev/src/vwlt/app.js",
+    "hostid"        : "puremfg.net",
+    "siteid"        : "mydev",
+    "grpid"         : "mydev",
+    "dbhost"        : "172.104.36.96",
+    "dbname"        : "MYDEV",
+    "port"          : 3000,
+    "vwport"        : 800,
+    "tzoset"        : "+8:00",
+    "mode"          : "development",
+    "max_restarts"  : 2
+  },
+  
+  "apps":{
+    
+    "puremfg":{
+        "name": "%siteid%.%hostid%",
+        "disabled":false,
+        "appid": "puremfg",
+        "proxy": {
+          "enable":true,
+          "ssl": false,
+          "host": "localhost",
+          "alias": []
+        },
+        
+        "node_args": ["--no-deprecation"],
+        "script": "%pmapp%",
+        "env": {
+            "TZOSET": "%tzoset%",
+            "MOBILE": false,
+            "SITEID": "%siteid%",
+            "GRPID": "%grpid%",
+            "DATA": "%sitedir%/%siteid%/data",
+            "GRP_DATA": "%sitedir%/%siteid%/data",
+            "PENTAHO" :{
+              "user":"pure@%siteid%",
+              "pwd": "%siteid%pure"  
+            },
+            "NODE_ENV": "%mode%",
+            "proxy": "off",
+            "PORT": "%port%",
+            "vwport": "%vwport%",
+            "DBSA":{
+              "host": "%dbhost%",
+              "name":"%dbname%",
+              "user":"root",
+              "pwd":"bukit8002",
+              "engine": "MYSQL",
+              "pooling": true,
+              "connectionLimit": 5
+            }
+        },
+        "log_date_format": "DD-MM HH:mm:ss",
+        "exec_mode": "fork"
+      
+    },
+    
+    "vwlt":{
+        "name": "%siteid%-sf.%hostid%",
+        "appid": "vwlt",
+        "disabled":false,
+        "proxy": {
+          "enable":true,
+          "ssl": false,
+          "host": "localhost",
+          "alias": []
+        },
+        "node_args": ["--no-deprecation"],
+        "script": "%vwapp%",
+        "env": {
+            "TZOSET": "%tzoset%",
+            "SITEID": "%siteid%",
+            "USER_AGENT": false,
+            "NODE_ENV": "%mode%",
+            "PORT": "%vwport%",
+            "DBVW": "%sitedir%/%siteid%/data/dwap.db",
+            "DBSA":{
+              "host": "%dbhost%",
+              "name":"%dbname%",
+              "user":"root",
+              "pwd":"bukit8002",
+              "engine": "MYSQL",
+              "pooling": true,
+              "connectionLimit": 1
+            }
+        },
+        "log_date_format": "DD-MM HH:mm:ss",
+        "exec_mode": "fork"
+    }
+  } 
+  
+}

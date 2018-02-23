@@ -1,0 +1,118 @@
+body,textarea { 
+	font-size: 0.8rem !important; 
+	font-family: Arial, Helvetica, sans-serif; 
+}
+
+.panel-body {
+  font-size: inherit;
+} .panel-body.pad {
+  padding:12px;
+}
+
+
+/* FORMS */
+.fitem {
+  margin-bottom: 6px;
+  margin-left: 20px;
+}
+
+fieldset .fitem {
+  margin-left: 0;
+}
+
+.fitem > label {
+  display: inline-block;
+  width:140px;
+} .fitem > label:after {
+  content: ':';
+}
+
+.fitem > input {
+  width:200px;
+}
+
+input.textbox-text.validatebox-text {
+  background: inherit;
+}
+
+form fieldset {
+  margin-left: 13px;
+  margin-top:16px;
+  padding:8px;
+	vertical-align: top;
+	border-radius: 6px;
+	border:none;
+	background-color: transparent;
+	float:none;
+} form fieldset:nth-of-type(1) {
+  margin-top:0px;  
+} form fieldset:not(.fill) legend {
+  margin-left:-12px;
+  letter-spacing: 1px;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  color: #08c;
+  padding: 2px 6px;
+  font-weight: normal;
+}
+
+input[readonly] + span.textbox,
+span.textbox-readonly:not(.textbox-invalid) {
+  background-color: #F0F8FF;
+}
+
+input.easyui-validatebox.validatebox-invalid {
+  border-color: #ffa8a8;
+}
+
+/* LOCKING */
+.ronly .l-btn:not(.cbnav):not(.ronly-on),
+.form-lock .textbox-f:not(.ronly-on):not(.fkey):not(.unlock) + .textbox {
+  opacity:0.75;
+  pointer-events:none;
+  background-color: #F0F8FF;
+} .unlock *:not(.tabs-disabled) {
+ opacity:1.0 !important;
+ pointer-events:auto;
+}
+
+/* GRIDS */
+
+.two, .three, .four, .five, .six{
+  vertical-align: top;
+  height: auto;
+} 
+
+.two > div {
+  max-width:50%;
+  min-width:400px;
+  display:inline-block;
+  vertical-align: inherit;
+  height: inherit;
+}
+
+/* SEPERATORS */
+span.vert-sep {
+	display:inline-block;
+	width:0px;
+	height:20px;
+	border-left:1px solid #ccc;
+	border-right:1px solid #fff;
+	vertical-align:middle;
+	margin-left:5px;
+	margin-right:4px;
+}
+
+div + span.vert-sep {
+  margin-left:0;
+	margin-right:0;  
+} div:empty + span.vert-sep {
+  display: none;
+}
+
+
+/* #BUTTONS */
+.l-btn-selected,
+a.toggle.l-btn-selected {
+  background-color:#CAFFD8;
+}
