@@ -80,56 +80,63 @@ module.exports = {
   conf: require('./config.json'),
   data: null,
 
-  addSite: function(siteid,args){
+  addSite: function(){
 
-    // pm2-apps addSite wlh "grpid=dis,tzoset=+7:00"
     var rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout
     });
 
-    rl.question('\nMYDB ROOT Password : ',function(pwd){
-      module.exports.dbconor.pwd = pwd;
-      if(!pwd) return rl.close();
-      rl.question('\nPure Application Path : ',function(pmapp){
-        module.exports.conf.vars.pmapp = pmapp;
-        rl.question('\nEnter Site Args : ',function(args){
-          rl.close();
-
-          // Start
-          if(args){
-            args.split(/,| /).map(function(e){
-              var bits = e.split('=');
-              cl(bits);
-              module.exports.conf.vars[bits[0]] = bits[1];
-            })
-          }
+    rl.question('\nSite/Database Name : ',function(siteid){
+      if(!siteid) return rl.close();
+      siteid = siteid.toLowerCase();
+      rl.question('MYDB ROOT Password : ',function(pwd){
+        module.exports.dbconor.pwd = pwd;
+        if(!pwd) return rl.close();
+        rl.question('Pure Version (2/3) : ',function(ver){
+          if(!(/2|3/).test(ver)) return rl.close();
+          module.exports.conf.vars.pmapp = {
+            '2':'/usr/share/nodejs/pure2r/app.min.js',
+            '3':'/usr/share/nodejs/pure3r/pureapp.js'
+          }[ver]
+          rl.question('Enter Site Args : ',function(args){
+            rl.close();
+  
+            // Start
+            if(args){
+              args.split(/,| /).map(function(e){
+                var bits = e.split('=');
+                cl(bits);
+                module.exports.conf.vars[bits[0]] = bits[1];
+              })
+            }
+            
+            var ports = maxport();
+            
+            // append additional data to config.json.vars
+            module.exports.conf.vars['port'] = parseInt(ports.mport);
+            module.exports.conf.vars['vwport'] = parseInt(ports.sport);
+            module.exports.conf.vars['siteid'] = siteid;
+            module.exports.conf.vars['dbname'] = siteid.toUpperCase();
+            
+            var jstr = JSON.stringify(module.exports.conf.apps,null,1);
+            
+            // loop thru vars & replace tokens in conf.apps
+            for(var x in module.exports.conf.vars){
+              var val = module.exports.conf.vars[x];
+              jstr = jstr.replace(new RegExp('%'+x+'%','g'),val);
+            }
+            module.exports.data = JSON.parse(jstr);
+            cl(module.exports.data);
+            write(siteid,module.exports.data);
+          });
           
-          var ports = maxport();
-          
-          // append additional data to config.json.vars
-          module.exports.conf.vars['port'] = parseInt(ports.mport);
-          module.exports.conf.vars['vwport'] = parseInt(ports.sport);
-          module.exports.conf.vars['siteid'] = siteid;
-          module.exports.conf.vars['dbname'] = siteid.toUpperCase();
-          
-          var jstr = JSON.stringify(module.exports.conf.apps,null,1);
-          
-          // loop thru vars & replace tokens in conf.apps
-          for(var x in module.exports.conf.vars){
-            var val = module.exports.conf.vars[x];
-            jstr = jstr.replace(new RegExp('%'+x+'%','g'),val);
-          }
-          module.exports.data = JSON.parse(jstr);
-          cl(module.exports.data);
-          write(siteid,module.exports.data);
-        });
-        
-        var comarg = [];
-        ['grpid','tzoset','mode'].map(function(e){comarg.push(e+'='+module.exports.conf.vars[e])})
-        rl.write(comarg.join(','));
-      })
-      rl.write(module.exports.conf.vars.pmapp);
+          var comarg = [];
+          ['grpid','tzoset','mode'].map(function(e){comarg.push(e+'='+module.exports.conf.vars[e])})
+          rl.write(comarg.join(','));
+        })
+        //rl.write(module.exports.conf.vars.pmapp);
+      });
     });   
     return '';
   },
