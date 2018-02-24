@@ -3,7 +3,10 @@
 /*
   TODO
   ====
-  
+  1. add nodepath, then following are relative.
+  1. add v2 & v3 path to config.json
+  2. change config.pmapp to use runpath/puredir/appid
+  3. add runpath to config.json.
   
 */
 
@@ -74,17 +77,6 @@ module.exports = {
     min_uptime: '1m'
   },
 
-  ver:{
-    
-    '2':{
-      path:'/usr/share/nodejs/pure2r/app.min.js'
-    },
-    
-    '3':{
-      path:'/usr/share/nodejs/pure3r/pureapp.js'
-    }
-  },
-
   conf: require('./config.json'),
   data: null,
 
@@ -101,13 +93,13 @@ module.exports = {
       if(!siteid) return rl.close();
       else siteid = siteid.toLowerCase();
       
-      srl.question('MYDB ROOT Password : ',function(pwd){
+      rl.question('MYDB ROOT Password : ',function(pwd){
         mex.dbconor.pwd = pwd;
         if(!pwd) return rl.close();
         
         rl.question('Pure Version (2/3) : ',function(ver){
           if(!(/2|3/).test(ver)) return rl.close();
-          mex.conf.vars.pmapp = mex.ver[ver].path;
+          mex.conf.vars.pmapp = mex.conf.vars['pmapp'+ver];
           
           rl.question('Enter Site Args : ',function(args){
             rl.close();
@@ -134,6 +126,7 @@ module.exports = {
             // loop thru vars & replace tokens in conf.apps
             for(var x in mex.conf.vars){
               var val = mex.conf.vars[x];
+              if(typeof(val)=='string') val = val.replace(new RegExp('%nodedir%','g'),mex.conf.vars.nodedir);
               jstr = jstr.replace(new RegExp('%'+x+'%','g'),val);
             }
             mex.data = JSON.parse(jstr);

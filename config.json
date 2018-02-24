@@ -1,8 +1,11 @@
 {
   "vars":{
-    "sitedir"       : "/usr/share/nodejs/sites",
-    "pmapp"         : "/usr/share/nodejs/pure/pureapp.js",
-    "vwapp"         : "/usr/share/nodejs/vwlt/app.js",
+    "nodedir"       : "/usr/share/nodejs",
+    "sitedir"       : "%nodedir%/sites",
+    "pmapp"         : "",
+    "pmapp2"        : "%nodedir%/pure2r/app.min.js",
+    "pmapp3"        : "%nodedir%/pure3r/pureapp.js",
+    "vwapp"         : "%nodedir%/vwlt/app.js",
     "hostid"        : "puremfg.net",
     "siteid"        : "mydev",
     "grpid"         : "mydev",
