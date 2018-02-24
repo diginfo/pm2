@@ -3,12 +3,9 @@
 /*
   TODO
   ====
-  1. remove root password & prompt.  
-  
   
   
 */
-
 
 function jsonParse(data){
   try {return JSON.parse(data)} 
@@ -77,28 +74,41 @@ module.exports = {
     min_uptime: '1m'
   },
 
+  ver:{
+    
+    '2':{
+      path:'/usr/share/nodejs/pure2r/app.min.js'
+    },
+    
+    '3':{
+      path:'/usr/share/nodejs/pure3r/pureapp.js'
+    }
+  },
+
   conf: require('./config.json'),
   data: null,
 
   addSite: function(){
 
+    var mex = module.exports;
+    
     var rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout
     });
 
-    rl.question('\nSite/Database Name : ',function(siteid){
+    rl.question('\nSite & Database Name : ',function(siteid){
       if(!siteid) return rl.close();
-      siteid = siteid.toLowerCase();
-      rl.question('MYDB ROOT Password : ',function(pwd){
-        module.exports.dbconor.pwd = pwd;
+      else siteid = siteid.toLowerCase();
+      
+      srl.question('MYDB ROOT Password : ',function(pwd){
+        mex.dbconor.pwd = pwd;
         if(!pwd) return rl.close();
+        
         rl.question('Pure Version (2/3) : ',function(ver){
           if(!(/2|3/).test(ver)) return rl.close();
-          module.exports.conf.vars.pmapp = {
-            '2':'/usr/share/nodejs/pure2r/app.min.js',
-            '3':'/usr/share/nodejs/pure3r/pureapp.js'
-          }[ver]
+          mex.conf.vars.pmapp = mex.ver[ver].path;
+          
           rl.question('Enter Site Args : ',function(args){
             rl.close();
   
@@ -107,35 +117,35 @@ module.exports = {
               args.split(/,| /).map(function(e){
                 var bits = e.split('=');
                 cl(bits);
-                module.exports.conf.vars[bits[0]] = bits[1];
+                mex.conf.vars[bits[0]] = bits[1];
               })
             }
             
             var ports = maxport();
             
             // append additional data to config.json.vars
-            module.exports.conf.vars['port'] = parseInt(ports.mport);
-            module.exports.conf.vars['vwport'] = parseInt(ports.sport);
-            module.exports.conf.vars['siteid'] = siteid;
-            module.exports.conf.vars['dbname'] = siteid.toUpperCase();
+            mex.conf.vars['port'] = parseInt(ports.mport);
+            mex.conf.vars['vwport'] = parseInt(ports.sport);
+            mex.conf.vars['siteid'] = siteid;
+            mex.conf.vars['dbname'] = siteid.toUpperCase();
             
-            var jstr = JSON.stringify(module.exports.conf.apps,null,1);
+            var jstr = JSON.stringify(mex.conf.apps,null,1);
             
             // loop thru vars & replace tokens in conf.apps
-            for(var x in module.exports.conf.vars){
-              var val = module.exports.conf.vars[x];
+            for(var x in mex.conf.vars){
+              var val = mex.conf.vars[x];
               jstr = jstr.replace(new RegExp('%'+x+'%','g'),val);
             }
-            module.exports.data = JSON.parse(jstr);
-            cl(module.exports.data);
-            write(siteid,module.exports.data);
+            mex.data = JSON.parse(jstr);
+            //cl(mex.data);
+            write(siteid,mex.data);
           });
           
-          var comarg = [];
-          ['grpid','tzoset','mode'].map(function(e){comarg.push(e+'='+module.exports.conf.vars[e])})
+          // default editable common list.
+          mex.conf.vars.grpid = siteid;
+          var comarg = []; ['tzoset','mode','grpid'].map(function(e){comarg.push(e+'='+mex.conf.vars[e])})
           rl.write(comarg.join(','));
-        })
-        //rl.write(module.exports.conf.vars.pmapp);
+        });
       });
     });   
     return '';
