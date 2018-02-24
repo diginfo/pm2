@@ -1,18 +1,19 @@
 {
   "vars":{
-    "sitedir"       : "/usr/share/nodejs/dev/run",
-    "pmapp"         : "/usr/share/nodejs/run/app.min.js",
-    "vwapp"         : "/usr/share/nodejs/dev/src/vwlt/app.js",
+    "sitedir"       : "/usr/share/nodejs/sites",
+    "pmapp"         : "/usr/share/nodejs/pure/pureapp.js",
+    "vwapp"         : "/usr/share/nodejs/vwlt/app.js",
     "hostid"        : "puremfg.net",
     "siteid"        : "mydev",
     "grpid"         : "mydev",
-    "dbhost"        : "172.104.36.96",
-    "dbname"        : "MYDEV",
+    "dbhost"        : "localhost",
+    "dbname"        : "MYDB",
     "port"          : 3000,
     "vwport"        : 800,
     "tzoset"        : "+8:00",
-    "mode"          : "development",
-    "max_restarts"  : 2
+    "mode"          : "production",
+    "max_restarts"  : 2,
+    "min_uptime"    : "1m"
   },
   
   "apps":{
@@ -20,14 +21,9 @@
     "puremfg":{
         "name": "%siteid%.%hostid%",
         "disabled":false,
+        "max_restarts" : "%max_restarts%",
+        "min_uptime": "%min_uptime%",
         "appid": "puremfg",
-        "proxy": {
-          "enable":true,
-          "ssl": false,
-          "host": "localhost",
-          "alias": []
-        },
-        
         "node_args": ["--no-deprecation"],
         "script": "%pmapp%",
         "env": {
@@ -37,12 +33,7 @@
             "GRPID": "%grpid%",
             "DATA": "%sitedir%/%siteid%/data",
             "GRP_DATA": "%sitedir%/%siteid%/data",
-            "PENTAHO" :{
-              "user":"pure@%siteid%",
-              "pwd": "%siteid%pure"  
-            },
             "NODE_ENV": "%mode%",
-            "proxy": "off",
             "PORT": "%port%",
             "vwport": "%vwport%",
             "DBSA":{
@@ -64,12 +55,8 @@
         "name": "%siteid%-sf.%hostid%",
         "appid": "vwlt",
         "disabled":false,
-        "proxy": {
-          "enable":true,
-          "ssl": false,
-          "host": "localhost",
-          "alias": []
-        },
+        "max_restarts" : "%max_restarts%",
+        "min_uptime": "%min_uptime%",
         "node_args": ["--no-deprecation"],
         "script": "%vwapp%",
         "env": {

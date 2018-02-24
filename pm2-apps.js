@@ -1,5 +1,15 @@
 #!/usr/bin/env node
 
+/*
+  TODO
+  ====
+  1. remove root password & prompt.  
+  
+  
+  
+*/
+
+
 function jsonParse(data){
   try {return JSON.parse(data)} 
   catch(e){
@@ -14,14 +24,15 @@ function jsonString(data){
 }
 
 var cl = console.log;
-function cj(obj){console.log(jsonString(obj))}
+function cj(obj){if(obj) console.log(jsonString(obj))}
 
 var pm2 = require('pm2');
 var fs = require('fs');
 var path = __dirname+'/json';
+var readline = require('readline');
 
 String.prototype.endsWith = function(suffix) {
-   return this.indexOf(suffix, this.length - suffix.length) !== -1;
+  return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
 
 function write(siteid,data){
@@ -55,7 +66,7 @@ module.exports = {
   dbconor:{
     host: "localhost",
     user:"root",
-    pwd:"bukit8002",
+    pwd:null,
     engine: "MYSQL",
     pooling: true,
     acquireTimeout: 30,
@@ -70,30 +81,57 @@ module.exports = {
   data: null,
 
   addSite: function(siteid,args){
-    
-    if(args){
-      args.split(/,| /).map(function(e){
-        var bits = e.split('=');
-        cl(bits);
-        module.exports.conf.vars[bits[0]] = bits[1];
+
+    // pm2-apps addSite wlh "grpid=dis,tzoset=+7:00"
+    var rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+
+    rl.question('\nMYDB ROOT Password : ',function(pwd){
+      module.exports.dbconor.pwd = pwd;
+      if(!pwd) return rl.close();
+      rl.question('\nPure Application Path : ',function(pmapp){
+        module.exports.conf.vars.pmapp = pmapp;
+        rl.question('\nEnter Site Args : ',function(args){
+          rl.close();
+
+          // Start
+          if(args){
+            args.split(/,| /).map(function(e){
+              var bits = e.split('=');
+              cl(bits);
+              module.exports.conf.vars[bits[0]] = bits[1];
+            })
+          }
+          
+          var ports = maxport();
+          
+          // append additional data to config.json.vars
+          module.exports.conf.vars['port'] = parseInt(ports.mport);
+          module.exports.conf.vars['vwport'] = parseInt(ports.sport);
+          module.exports.conf.vars['siteid'] = siteid;
+          module.exports.conf.vars['dbname'] = siteid.toUpperCase();
+          
+          var jstr = JSON.stringify(module.exports.conf.apps,null,1);
+          
+          // loop thru vars & replace tokens in conf.apps
+          for(var x in module.exports.conf.vars){
+            var val = module.exports.conf.vars[x];
+            jstr = jstr.replace(new RegExp('%'+x+'%','g'),val);
+          }
+          module.exports.data = JSON.parse(jstr);
+          cl(module.exports.data);
+          write(siteid,module.exports.data);
+        });
+        
+        var comarg = [];
+        ['grpid','tzoset','mode'].map(function(e){comarg.push(e+'='+module.exports.conf.vars[e])})
+        rl.write(comarg.join(','));
       })
-    }
-    
-    var ports = maxport();
-    module.exports.conf.vars['port'] = parseInt(ports.mport);
-    module.exports.conf.vars['vwport'] = parseInt(ports.sport);
-    module.exports.conf.vars['siteid'] = siteid;
-    module.exports.conf.vars['dbname'] = siteid.toUpperCase();
-    
-    var jstr = JSON.stringify(module.exports.conf.apps,null,1);
-    for(var x in module.exports.conf.vars){
-      var val = module.exports.conf.vars[x];
-      jstr = jstr.replace(new RegExp('%'+x+'%','g'),val);
-    }
-    module.exports.data = JSON.parse(jstr);
-    cl(module.exports.data);
-    write(siteid,module.exports.data);   
-    
+      rl.write(module.exports.conf.vars.pmapp);
+    });   
+    return '';
   },
 
   kill: function(){
