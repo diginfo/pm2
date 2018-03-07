@@ -74,7 +74,8 @@ module.exports = {
   
   defaults: {
     max_restarts:3,
-    min_uptime: '1m'
+    min_uptime: '1m',
+    node_args: ["--expose-gc"]
   },
 
   conf: require('./config.json'),
