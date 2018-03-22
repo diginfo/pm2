@@ -81,7 +81,7 @@ module.exports = {
   conf: require('./config.json'),
   data: null,
 
-  addSite: function(){
+  add: function(){
 
     var mex = module.exports;
     
@@ -131,8 +131,11 @@ module.exports = {
               jstr = jstr.replace(new RegExp('%'+x+'%','g'),val);
             }
             mex.data = JSON.parse(jstr);
-            //cl(mex.data);
             write(siteid,mex.data);
+            cl('SUCCESS:',path+'/'+siteid+'.json file created.');
+            cl('\n========');
+            cl('TO START:','pm2 start '+path+'/'+siteid+'.json');
+
           });
           
           // default editable common list.

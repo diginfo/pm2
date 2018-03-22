@@ -7,6 +7,7 @@
     "pm2": "*",
     "express-session":"*",
     "connect-redis":"*",
-    "jade":"*"
+    "jade":"*",
+    "async":"*"
   }
 }
